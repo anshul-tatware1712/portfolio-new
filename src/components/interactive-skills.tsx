@@ -168,26 +168,34 @@ export const InteractiveSkills: React.FC<InteractiveSkillsProps> = ({
     : categories.flatMap((cat) => skills[cat]);
 
   return (
-    <div className="space-y-6">
-      {/* Tabs for categories */}
+    <div className="w-full space-y-6">
+      {/* Tabs for categories - now mobile responsive */}
       <Tabs
         defaultValue="all"
-        className="mb-4 flex flex-wrap justify-start gap-4"
+        className="w-full"
       >
-        <TabsList>
-          <TabsTrigger value="all" onClick={() => setSelectedCategory(null)}>
-            All Skills
-          </TabsTrigger>
-          {categories.map((category) => (
-            <TabsTrigger
-              key={category}
-              value={category}
-              onClick={() => handleCategoryClick(category)}
+        {/* Scrollable wrapper for mobile */}
+        <div className="w-full overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
+          <TabsList className="inline-flex w-auto min-w-full md:w-auto flex-nowrap md:flex-wrap justify-start">
+            <TabsTrigger 
+              value="all" 
+              onClick={() => setSelectedCategory(null)}
+              className="whitespace-nowrap"
             >
-              {category}
+              All Skills
             </TabsTrigger>
-          ))}
-        </TabsList>
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category}
+                value={category}
+                onClick={() => handleCategoryClick(category)}
+                className="whitespace-nowrap"
+              >
+                {category}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
         {/* Content for each category */}
         <AnimatePresence mode="wait">

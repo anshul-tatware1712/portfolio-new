@@ -26,7 +26,7 @@
     --accent-foreground: 220.9 39.3% 11%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: oklch(1 0 0);
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
@@ -58,7 +58,7 @@
     --accent-foreground: 210 20% 98%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive-foreground: oklch(1 0 0);
 
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
@@ -66,6 +66,8 @@
   }
   .theme {
     --animate-shine: shine var(--duration) infinite linear;
+    --color-destructive-foreground: oklch(1 0 0);
+    --color-color-destructive-foreground: var(----color-destructive-foreground);
   }
 }
 

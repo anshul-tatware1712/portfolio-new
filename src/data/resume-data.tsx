@@ -183,8 +183,8 @@ export const RESUME_DATA = {
   ],
   work: [
     {
-      company: "Pixel Tech",
-      link: "https://pixeltech.in",
+      company: "Pixel Technology",
+      link: "https://pixeltechnology.in",
       badges: ["On Site"],
       title: "SDE-1 (Frontend Engineer)",
       start: "Apr 2025",
@@ -193,8 +193,8 @@ export const RESUME_DATA = {
         "Led the development of real-time chat and campaign tools for the company’s flagship product. Improved overall app speed and optimized user experience, resulting in faster load times and higher engagement. Contributed to core product features including analytics, documentation, and notification systems. Built reusable design components and improved development efficiency across web and mobile teams.",
     },
     {
-      company: "Pixel Tech",
-      link: "https://pixeltech.in",
+      company: "Pixel Technology",
+      link: "https://pixeltechnology.in",
       badges: ["On Site"],
       title: "Frontend Developer Intern",
       start: "Dec 2024",
