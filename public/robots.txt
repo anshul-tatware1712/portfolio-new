@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://anshulpersonal.com
+Host: https://portfolio-new-snowy-theta.vercel.app/
 
 # Sitemaps
-Sitemap: https://anshulpersonal.com/sitemap.xml
+Sitemap: https://portfolio-new-snowy-theta.vercel.app/sitemap.xml

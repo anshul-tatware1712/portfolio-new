@@ -45,7 +45,7 @@ export default function DogFollower() {
   // Distance threshold - dog stops running when close enough
   const STOP_DISTANCE = 50;
   // Constant speed in pixels per frame (adjust for faster/slower)
-  const SPEED = 3;
+  const SPEED = 1;
 
   // Initialize on client side
   useEffect(() => {

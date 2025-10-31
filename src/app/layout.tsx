@@ -16,8 +16,9 @@ export const metadata: Metadata = {
   },
   description: RESUME_DATA.summary,
   keywords: [
-    "AI Researcher",
-    "Generative AI",
+    "Frontend Developer",
+    "Next.js",
+    "React.js",
     "Portfolio",
     RESUME_DATA.name,
     ...Object.values(RESUME_DATA.skills).flat(),
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
       template: `%s | ${RESUME_DATA.name}`,
     },
     description: RESUME_DATA.summary,
-    creator: "@ruixen",
+    creator: "@anshultatware",
     images: ["/website_ss.png"],
   },
   alternates: {
