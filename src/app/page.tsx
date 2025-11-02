@@ -20,8 +20,6 @@ import { HyperText } from "@/components/magicui/hyper-text";
 import { Education } from "@/components/ui/work";
 import DogFollower from "@/components/icons/dog-follower";
 
-
-
 // Name animation overlay component
 const NameAnimation = () => {
   const [visible, setVisible] = useState(true);
@@ -208,36 +206,38 @@ export default function Page() {
                   <p className="max-w-md text-sm text-muted-foreground">
                     {RESUME_DATA.about}
                   </p>
-                  <div className="flex gap-x-1 pt-1 text-sm text-muted-foreground print:hidden">
-                    {RESUME_DATA.contact.email ? (
-                      <Button
-                        className="size-8"
-                        variant="outline"
-                        size="icon"
-                        asChild
-                      >
-                        <a href={`mailto:${RESUME_DATA.contact.email}`}>
-                          <MailIcon className="size-4" />
-                        </a>
-                      </Button>
-                    ) : null}
-                    {RESUME_DATA.contact.social.map((social) => (
-                      <Button
-                        key={social.name}
-                        className="size-8"
-                        variant="outline"
-                        size="icon"
-                        asChild
-                      >
-                        <a
-                          href={social.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                  <div className="flex flex-col gap-x-1 gap-y-2 pt-1 text-sm text-muted-foreground md:flex-row print:hidden">
+                    <div className="flex gap-5 gap-x-1">
+                      {RESUME_DATA.contact.email ? (
+                        <Button
+                          className="size-8"
+                          variant="outline"
+                          size="icon"
+                          asChild
                         >
-                          <social.icon className="size-4" />
-                        </a>
-                      </Button>
-                    ))}
+                          <a href={`mailto:${RESUME_DATA.contact.email}`}>
+                            <MailIcon className="size-4" />
+                          </a>
+                        </Button>
+                      ) : null}
+                      {RESUME_DATA.contact.social.map((social) => (
+                        <Button
+                          key={social.name}
+                          className="size-8"
+                          variant="outline"
+                          size="icon"
+                          asChild
+                        >
+                          <a
+                            href={social.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <social.icon className="size-4" />
+                          </a>
+                        </Button>
+                      ))}
+                    </div>
                     <Button
                       variant="outline"
                       className="flex h-8 items-center gap-2"

@@ -146,7 +146,7 @@ export const RESUME_DATA = {
     "Frontend Developer passionate about crafting modern, high-performance web applications. I specialize in React, Next.js, and Tailwind CSS, building seamless user experiences that combine clean design with scalable architecture. My work focuses on component-driven development, performance optimization, and UI consistency, ensuring products feel as good as they look. With a growing interest in AI-driven interfaces and full-stack integration, I'm driven by the challenge of turning ideas into fast, interactive, and meaningful digital experiences",
   avatarUrl: "https://avatars.githubusercontent.com/u/191676359?v=4",
   personalWebsiteUrl: "https://www.devtriex.com",
-  resumeUrl: "/Anshul_Resume.pdf",
+  resumeUrl: "/Anshul_Resume_xdev.pdf",
   contact: {
     email: "anshultatware01@gmail.com",
     social: [

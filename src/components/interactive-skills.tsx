@@ -170,15 +170,12 @@ export const InteractiveSkills: React.FC<InteractiveSkillsProps> = ({
   return (
     <div className="w-full space-y-6">
       {/* Tabs for categories - now mobile responsive */}
-      <Tabs
-        defaultValue="all"
-        className="w-full"
-      >
+      <Tabs defaultValue="all" className="w-full">
         {/* Scrollable wrapper for mobile */}
-        <div className="w-full overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
-          <TabsList className="inline-flex w-auto min-w-full md:w-auto flex-nowrap md:flex-wrap justify-start">
-            <TabsTrigger 
-              value="all" 
+        <div className="-mx-4 w-full overflow-x-auto scrollbar-none px-4 pb-2 md:mx-0 md:px-0">
+          <TabsList className="scrollbar-thin inline-flex w-auto min-w-full scrollbar-none justify-start md:w-auto">
+            <TabsTrigger
+              value="all"
               onClick={() => setSelectedCategory(null)}
               className="whitespace-nowrap"
             >
