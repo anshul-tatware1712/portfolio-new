@@ -157,7 +157,7 @@ export const RESUME_DATA = {
       },
       {
         name: "LinkedIn",
-        url: "www.linkedin.com/in/anshul-tatware1712",
+        url: "https://www.linkedin.com/in/anshul-tatware1712",
         icon: LinkedInIcon,
       },
       {
