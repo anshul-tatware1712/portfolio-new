@@ -314,7 +314,7 @@ export default function Page() {
                 <h2 className="text-xl font-medium">Education</h2>
                 <Education educations={EDUCATION_DATA} />
               </Section>
-              <Section id="certifications" className="scroll-mt-16">
+              <Section id="certifications" className="scroll-mt-16 pb-10">
                 <h2 className="text-xl font-medium">Certifications</h2>
                 <Education educations={CERTIFICATIONS_DATA} />
               </Section>
