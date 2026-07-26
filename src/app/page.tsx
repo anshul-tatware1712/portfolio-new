@@ -52,7 +52,7 @@ const NameAnimation = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }} // Faster fade in/out
-          className="fixed inset-0 z-50 flex items-center justify-center bg-white"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background"
         >
           <div className="relative">
             <motion.div
@@ -78,7 +78,7 @@ const NameAnimation = () => {
                   transition={{ delay: 0.1 * index, duration: 0.5 }} // Faster animation with shorter delay
                   className="overflow-hidden"
                 >
-                  <HyperText className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-4xl font-bold text-transparent sm:text-6xl lg:text-9xl">
+                  <HyperText className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-4xl font-bold text-transparent dark:from-gray-100 dark:via-gray-300 dark:to-gray-100 sm:text-6xl lg:text-9xl">
                     {word}
                   </HyperText>
                 </motion.div>
@@ -92,7 +92,7 @@ const NameAnimation = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }} // Faster appearance of about text
             >
-              <HyperText className="text-sm tracking-wide text-gray-600">
+              <HyperText className="text-sm tracking-wide text-gray-600 dark:text-gray-400">
                 {RESUME_DATA.about}
               </HyperText>
             </motion.div>
@@ -102,6 +102,8 @@ const NameAnimation = () => {
     </AnimatePresence>
   );
 };
+
+
 
 // Type definition for GitHub repository data
 interface Repository {
@@ -169,6 +171,8 @@ export default function Page() {
       {/* Dog follower component */}
       <DogFollower />
 
+
+
       {/* Add the name animation component */}
       <NameAnimation />
 
@@ -183,7 +187,7 @@ export default function Page() {
             <HoverNavbar links={commandLinks} />
             <motion.section
               id="top"
-              className="mx-auto w-full max-w-4xl space-y-8 bg-white print:space-y-6"
+              className="mx-auto w-full max-w-4xl space-y-8 bg-white dark:bg-transparent print:space-y-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}

@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRightIcon, BriefcaseIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface ExperienceTimelineItemProps {
@@ -24,9 +22,9 @@ export const ExperienceTimelineItem: React.FC<ExperienceTimelineItemProps> = ({
       transition={{ delay: index * 0.1 }}
     >
       <div className="group flex gap-4">
-        {/* Timeline icon or logo */}
-        <div className="relative z-10 flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-muted bg-background shadow-md">
-          <BriefcaseIcon className="h-5 w-5 text-primary/80 transition-colors duration-300 group-hover:text-primary" />
+        {/* Timeline dot indicator */}
+        <div className="relative z-10 mt-1.5 flex h-3 w-3 flex-shrink-0 items-center justify-center">
+          <span className="h-3 w-3 rounded-full border-2 border-primary bg-background transition-colors duration-300 group-hover:bg-primary" />
         </div>
 
         {/* Content */}
@@ -54,7 +52,7 @@ export const ExperienceTimelineItem: React.FC<ExperienceTimelineItemProps> = ({
             </div>
 
             <div className="mb-2 flex flex-wrap gap-1">
-              <span className=" text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                 {work.title}
               </span>
               <div className="flex-1" />

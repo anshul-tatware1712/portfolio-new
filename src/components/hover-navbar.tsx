@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 import {
-  HomeIcon,
+  ArrowUpIcon,
   BriefcaseIcon,
-  GraduationCapIcon,
+  User2Icon,
+  LayersIcon,
+  BookOpenIcon,
+  ShieldCheckIcon,
   CodeIcon,
-  FileTextIcon,
+  SunIcon,
+  MoonIcon,
 } from "lucide-react";
 import { scrollToSection } from "@/lib/utils";
 
@@ -17,31 +21,54 @@ interface NavbarProps {
 }
 
 export function HoverNavbar({ links = [] }: NavbarProps) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
+
+  const toggleDarkMode = () => {
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    if (newIsDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+
   const navItems = [
-    { name: "Home", icon: <HomeIcon className="h-5 w-5" />, href: "#top" },
+    { name: "Top", icon: <ArrowUpIcon className="h-[18px] w-[18px]" />, href: "#top" },
     {
       name: "About",
-      icon: <FileTextIcon className="h-5 w-5" />,
+      icon: <User2Icon className="h-[18px] w-[18px]" />,
       href: "#about",
     },
     {
       name: "Work",
-      icon: <BriefcaseIcon className="h-5 w-5" />,
+      icon: <BriefcaseIcon className="h-[18px] w-[18px]" />,
       href: "#work",
     },
     {
+      name: "Skills",
+      icon: <CodeIcon className="h-[18px] w-[18px]" />,
+      href: "#skills",
+    },
+    {
       name: "Projects",
-      icon: <CodeIcon className="h-5 w-5" />,
+      icon: <LayersIcon className="h-[18px] w-[18px]" />,
       href: "#projects",
     },
     {
       name: "Education",
-      icon: <GraduationCapIcon className="h-5 w-5" />,
+      icon: <BookOpenIcon className="h-[18px] w-[18px]" />,
       href: "#education",
     },
     {
       name: "Certifications",
-      icon: <GraduationCapIcon className="h-5 w-5" />,
+      icon: <ShieldCheckIcon className="h-[18px] w-[18px]" />,
       href: "#certifications",
     },
   ];
@@ -68,26 +95,62 @@ export function HoverNavbar({ links = [] }: NavbarProps) {
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
-        className="rounded-3xl border border-gray-200 bg-transparent shadow-xl backdrop-blur-3xl dark:border-gray-800 dark:bg-slate-900/80"
+        className="rounded-full border border-gray-200 bg-white/80 shadow-xl backdrop-blur-xl dark:border-gray-800 dark:bg-gray-900/80"
       >
-        <nav className="flex items-center space-x-1 px-2 py-1 md:space-x-2 md:py-2.5">
+        <nav className="flex items-center space-x-1 px-3 py-2">
           {navItems.map((item) => (
             <Button
               key={item.name}
               variant="ghost"
-              size="sm"
-              className="flex flex-col items-center gap-1 rounded-full px-2 py-1 text-xs font-medium transition-all hover:bg-gray-100 dark:hover:bg-slate-800 md:flex-row md:gap-2 md:px-3 md:py-2 md:text-sm"
+              size="icon"
+              className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
               asChild
+              title={item.name}
             >
               <a
                 href={item.href}
                 onClick={(e) => handleNavigation(e, item.href)}
               >
                 {item.icon}
-                <span className="hidden xs:inline md:inline">{item.name}</span>
               </a>
             </Button>
           ))}
+
+          {/* Divider */}
+          <div className="mx-1 h-5 w-px bg-gray-200 dark:bg-gray-700" />
+
+          {/* Dark mode toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+            onClick={toggleDarkMode}
+            title={isDark ? "Light mode" : "Dark mode"}
+          >
+            <AnimatePresence mode="wait">
+              {isDark ? (
+                <motion.div
+                  key="sun"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <SunIcon className="h-5 w-5 text-yellow-400" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="moon"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <MoonIcon className="h-5 w-5" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Button>
         </nav>
       </motion.div>
     </div>

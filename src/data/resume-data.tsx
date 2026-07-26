@@ -10,7 +10,7 @@ export const EDUCATION_DATA: EducationItemType[] = [
         id: "btech-cs",
         degree: "Bachelor of Technology",
         field: "Computer Science & Engineering",
-        educationPeriod: "2020 — 2024",
+        educationPeriod: "2020  2024",
         educationType: "Undergraduate",
         icon: "education",
         description:
@@ -63,24 +63,6 @@ export const EDUCATION_DATA: EducationItemType[] = [
     ],
     isCurrentEducation: false,
   },
-  {
-    id: "crpf-public-school",
-    institutionName: "CRPF Public School Delhi",
-    positions: [
-      {
-        id: "secondary-education",
-        degree: "Secondary Education",
-        field: "Science Stream",
-        educationPeriod: "2018 — 2020",
-        educationType: "Secondary",
-        icon: "education",
-        description:
-          "Completed secondary education with focus on science and mathematics, building foundation for engineering studies.",
-        isExpanded: false,
-      },
-    ],
-    isCurrentEducation: false,
-  },
 ];
 
 export const CERTIFICATIONS_DATA: EducationItemType[] = [
@@ -121,15 +103,38 @@ export const CERTIFICATIONS_DATA: EducationItemType[] = [
         isExpanded: false,
       },
       {
-        id: "cohort-2-harkirat",
-        degree: "Cohort 2.0",
-        field: "Harkirat Singh",
+        id: "lambda-4-backend",
+        degree: "Lambda 4.0 – Advance Node.js & Backend Engineering",
+        field: "Sanket Singh",
         educationPeriod: "2024",
         educationType: "Certification",
         icon: "code",
         description:
-          "Full-stack development bootcamp covering modern web technologies, DevOps, and production-ready development practices.",
-        skills: ["Full-Stack Development", "DevOps", "Production Systems"],
+          "In-depth backend engineering course covering advanced Node.js patterns, microservices, databases, message queues, and production-grade API design.",
+        skills: [
+          "Node.js",
+          "Express.js",
+          "Microservices",
+          "REST API Design",
+          "Database Design",
+        ],
+        isExpanded: false,
+      },
+      {
+        id: "arpit-system-design",
+        degree: "System Design Course",
+        field: "Arpit Bhayani",
+        educationPeriod: "2024",
+        educationType: "Certification",
+        icon: "code",
+        description:
+          "Comprehensive system design course covering distributed systems, scalability patterns, database internals, and real-world architecture case studies.",
+        skills: [
+          "Distributed Systems",
+          "Scalability",
+          "Database Internals",
+          "System Architecture",
+        ],
         isExpanded: false,
       },
     ],
@@ -137,13 +142,53 @@ export const CERTIFICATIONS_DATA: EducationItemType[] = [
   },
 ];
 
+const ICON_BASE =
+  "https://raw.githubusercontent.com/onemarc/tech-icons/main/icons";
+
+export const SKILLS_ICONS = [
+  { name: "React", icon: `${ICON_BASE}/react-light.svg` },
+  { name: "Next.js", icon: `${ICON_BASE}/nextjs-light.svg` },
+  { name: "TypeScript", icon: `${ICON_BASE}/typescript.svg` },
+  { name: "JavaScript", icon: `${ICON_BASE}/javascript.svg` },
+  { name: "Node.js", icon: `${ICON_BASE}/nodejs.svg` },
+  { name: "GraphQL", icon: `${ICON_BASE}/graphql-dark.svg` },
+  { name: "Redux", icon: `${ICON_BASE}/redux.svg` },
+  { name: "HTML5", icon: `${ICON_BASE}/html.svg` },
+  { name: "CSS3", icon: `${ICON_BASE}/css.svg` },
+  { name: "Tailwind CSS", icon: `${ICON_BASE}/tailwindcss-dark.svg` },
+  { name: "Framer Motion", icon: `${ICON_BASE}/framermotion.svg` },
+  { name: "React Native", icon: `${ICON_BASE}/reactnativepaper-light.svg` },
+  { name: "React Query", icon: `${ICON_BASE}/reactquery-light.svg` },
+  { name: "Express", icon: `${ICON_BASE}/expressjs.svg` },
+  { name: "PostgreSQL", icon: `${ICON_BASE}/postgressql-light.svg` },
+  { name: "MongoDB", icon: `${ICON_BASE}/mongodb.svg` },
+  { name: "Redis", icon: `${ICON_BASE}/redis-dark.svg` },
+  { name: "Prisma", icon: `${ICON_BASE}/prisma-dark.svg` },
+  { name: "Docker", icon: `${ICON_BASE}/docker.svg` },
+  { name: "Azure", icon: `${ICON_BASE}/azure-light.svg` },
+  { name: "Kubernetes", icon: `${ICON_BASE}/kubernetes.svg` },
+  { name: "Git", icon: `${ICON_BASE}/git.svg` },
+  { name: "GitHub", icon: `${ICON_BASE}/github-light.svg` },
+  { name: "GitHub Actions", icon: `${ICON_BASE}/githubactions-light.svg` },
+  { name: "Vercel", icon: `${ICON_BASE}/vercel.svg` },
+  { name: "Nginx", icon: `${ICON_BASE}/nginx.svg` },
+  { name: "Linux", icon: `${ICON_BASE}/linux-dark.svg` },
+  { name: "Elasticsearch", icon: `${ICON_BASE}/elasticsearch-dark.svg` },
+  { name: "Jest", icon: `${ICON_BASE}/jestjs.svg` },
+  { name: "Cypress", icon: `${ICON_BASE}/cypress-light.svg` },
+  { name: "Figma", icon: `${ICON_BASE}/figma-light.svg` },
+  { name: "VS Code", icon: `${ICON_BASE}/vscode-light.svg` },
+  { name: "Postman", icon: `${ICON_BASE}/postman.svg` },
+  { name: "OpenAI", icon: `${ICON_BASE}/openai-light.svg` },
+];
+
 export const RESUME_DATA = {
   name: "Anshul Tatware",
   initials: "A",
   location: "Indore, India",
-  about: "Frontend Developer",
+  about: "Software Engineer",
   summary:
-    "Frontend Developer passionate about crafting modern, high-performance web applications. I specialize in React, Next.js, and Tailwind CSS, building seamless user experiences that combine clean design with scalable architecture. My work focuses on component-driven development, performance optimization, and UI consistency, ensuring products feel as good as they look. With a growing interest in AI-driven interfaces and full-stack integration, I'm driven by the challenge of turning ideas into fast, interactive, and meaningful digital experiences",
+    "Software Engineer building scalable, high-performance web applications end to end. I work across the stack  React, Next.js, Node.js, GraphQL, and cloud infrastructure  shipping products that handle real-time messaging at scale, headless commerce for enterprise clients, and P2P trading platforms with Web3 integrations. My focus is on clean architecture, performance optimization, and developer experience, from SSR/SSG rendering strategies and cache normalization to monorepo orchestration and distributed tracing. I care about building things that are fast, reliable, and maintainable.",
   avatarUrl: "https://avatars.githubusercontent.com/u/191676359?v=4",
   personalWebsiteUrl: "https://www.devtriex.com",
   resumeUrl: "/Anshul_Resume_xdev.pdf",
@@ -174,33 +219,27 @@ export const RESUME_DATA = {
       start: "2020",
       end: "2024",
     },
-    {
-      school: "CRPF Public School",
-      degree: "Secondary Education in Science Stream",
-      start: "2018",
-      end: "2020",
-    },
   ],
   work: [
     {
-      company: "Pixel Technology",
-      link: "https://pixeltechnology.in",
+      company: "MTS",
+      link: "#",
       badges: ["On Site"],
-      title: "SDE-1 (Frontend Engineer)",
-      start: "Apr 2025",
-      end: "Aug 2025",
+      title: "SDE-1 (Software Engineer)",
+      start: "Aug 2025",
+      end: undefined,
       description:
-        "Led the development of real-time chat and campaign tools for the company’s flagship product. Improved overall app speed and optimized user experience, resulting in faster load times and higher engagement. Contributed to core product features including analytics, documentation, and notification systems. Built reusable design components and improved development efficiency across web and mobile teams.",
+        "Engineered the Admin Panel and headless storefront for an enterprise D365 Commerce platform using Next.js 15, React 19, and App Router with SSR/SSG. Built a drag-and-drop Site Builder (dnd-kit), integration flow visualizer (ReactFlow), and RBAC dashboards with CASL + Microsoft Entra ID SSO. Developed the E4 GraphQL middleware (Apollo Server v4 + Koa) with TanStack Query v5 hydration boundaries, DataLoader batching, and Elasticsearch full-text search. Worked across a 14-service monorepo (Lerna + Nx + Turbo) spanning Strapi 5, MSSQL, PostgreSQL, Redis, Kafka, and Azure Functions, with OpenTelemetry + Jaeger tracing and Azure Key Vault secrets management. Owned frontend testing with Vitest, React Testing Library, MSW, and Cypress E2E.",
     },
     {
       company: "Pixel Technology",
       link: "https://pixeltechnology.in",
       badges: ["On Site"],
-      title: "Frontend Developer Intern",
+      title: "SDE-1 (Software Engineer)",
       start: "Dec 2024",
-      end: "Mar 2025",
+      end: "Aug 2025",
       description:
-        "Developed a multi-utility web app from concept to deployment. Translated designs into interactive user interfaces and improved user engagement. Focused on accessibility, SEO, and performance optimizations. Collaborated with the team through version control and contributed to analytics setup and data insights.",
+        "Architected real-time messaging infrastructure for 100+ businesses supporting 10K+ concurrent WebSocket connections with less than w100ms delivery latency, plus a shared team inbox with live agent assignment, conversation tagging, and canned responses. Built a full Meta Business API template engine (text, media, carousel, WhatsApp Flows, interactive lists, auth OTP, LTO) reducing creation time from 30 min to 3 min and lifting CTR by 47%. Slashed bundle size by 65% and improved LCP from 4.2s to 2.5s through RTK Query cache normalization, React.lazy code-splitting, and dynamic imports. Built a Binance P2P-style marketplace with smart-contract-backed escrow achieving 94% transaction success rate across USDT/ETH/TRX pairs. Integrated MetaMask and TronLink wallets with full deposit/withdrawal flows, Web3 sign-to-verify + JWT auth with 2FA and KYC gates.",
     },
   ],
   skills: {
@@ -214,53 +253,45 @@ export const RESUME_DATA = {
       "Tailwind CSS",
       "Framer Motion",
     ],
-    "Mobile Development": [
-      "React Native",
-      "Expo",
-      "Mobile UI/UX",
-      "Cross-Platform Apps",
-    ],
-    "UI/UX & Design": [
-      "Figma",
-      "UI/UX Design",
-      "Responsive Design",
-      "Design Systems",
-      "Prototyping",
-      "Wireframing",
-    ],
-    "Development Tools": [
-      "Git",
-      "GitHub",
-      "Vite.js",
-      "Webpack",
-      "npm/yarn",
-      "VS Code",
-      "Postman",
-    ],
-    "AI & Backend (Learning)": [
-      "Node.js (Learning)",
-      "Express.js (Learning)",
+    "Backend & Infra": [
+      "Node.js",
+      "Express.js",
+      "GraphQL",
+      "Apollo Server",
       "REST APIs",
-      "API Integration",
-      "ChatGPT API",
-      "Python (Basic)",
-      "Machine Learning (Basic)",
+      "Redis",
+      "PostgreSQL",
+      "Kafka",
+      "Elasticsearch",
+      "WebSockets",
     ],
-    "Libraries & More": [
-      "Storybook",
-      "Redux",
+    "Cloud & DevOps": [
+      "Docker",
+      "Azure",
+      "Vercel",
+      "GitHub Actions",
+      "Nginx",
+      "CI/CD",
+    ],
+    "Libraries & Tools": [
+      "Redux/RTK Query",
       "Zustand",
-      "React Query",
+      "TanStack Query",
+      "React Hook Form",
+      "Zod",
+      "dnd-kit",
+      "ReactFlow",
+      "Vitest",
       "Jest",
       "Cypress",
-      "Prisma",
-      "Socket.io",
+      "Sentry",
+      "OpenTelemetry",
     ],
   },
 
   projects: [
     {
-      title: "TrioChat: AI WhatsApp Automation Platform",
+      title: "DuoChat: AI WhatsApp Automation Platform",
       techStack: [
         "Next.js (latest)",
         "React 18+",
@@ -277,8 +308,8 @@ export const RESUME_DATA = {
       description:
         "Developed a scalable multitenant SaaS platform for WhatsApp Business automation including campaigns, template management, flows, direct CRM integrations, unified inbox, and real-time analytics. Implemented robust state management (Redux/Zustand), optimized rendering for large chat volumes, and integrated API-based automation for over 10+ enterprise clients.",
       link: {
-        label: "triochat.io",
-        href: "https://triochat.io/",
+        label: "duochat.in",
+        href: "https://www.duochat.in/",
       },
     },
     {
@@ -319,7 +350,7 @@ export const RESUME_DATA = {
         "Framer Motion",
       ],
       description:
-        "Built a personal freelancing portfolio to showcase major projects, services, and testimonials, with integrated contact forms and social links. The site features a polished, modern UI, mobile responsiveness, animated transitions, and SEO optimization—streamlining client reachout and elevating professional presence.",
+        "Built a personal freelancing portfolio to showcase major projects, services, and testimonials, with integrated contact forms and social links. The site features a polished, modern UI, mobile responsiveness, animated transitions, and SEO optimizationstreamlining client reachout and elevating professional presence.",
       link: {
         label: "devtriex.com",
         href: "https://www.devtriex.com/",

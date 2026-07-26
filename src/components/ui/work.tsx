@@ -163,45 +163,15 @@ export function ExperienceItem({
 
 export function EducationItem({ education }: { education: EducationItemType }) {
   return (
-    <div className="space-y-4 py-4">
-      <div className="not-prose flex items-center gap-3">
-        <div
-          className="flex size-6 shrink-0 items-center justify-center"
-          aria-hidden
-        >
-          {education.institutionLogo ? (
-            <Image
-              src={education.institutionLogo}
-              alt={education.institutionName}
-              width={24}
-              height={24}
-              quality={100}
-              className="rounded-full"
-              unoptimized
-            />
-          ) : (
-            <span className="flex size-2 rounded-full bg-zinc-300 dark:bg-zinc-600" />
-          )}
-        </div>
-
-        <h3 className="text-lg font-medium leading-snug">
-          {education.institutionName}
-        </h3>
-
-        {education.isCurrentEducation && (
-          <span className="relative flex items-center justify-center">
-            <span className="absolute inline-flex size-3 animate-ping rounded-full bg-blue-500 opacity-50" />
-            <span className="relative inline-flex size-2 rounded-full bg-blue-500" />
-            <span className="sr-only">Currently Studying</span>
-          </span>
-        )}
-      </div>
-
-      <div className="relative space-y-4 before:absolute before:left-3 before:h-full before:w-px before:bg-border">
-        {education.positions.map((position) => (
-          <EducationPositionItem key={position.id} position={position} />
-        ))}
-      </div>
+    <div className="mt-4">
+      {education.positions.map((position) => (
+        <EducationPositionItem
+          key={position.id}
+          position={position}
+          institutionName={education.institutionName}
+          institutionLogo={education.institutionLogo}
+        />
+      ))}
     </div>
   );
 }
@@ -304,108 +274,112 @@ export function ExperiencePositionItem({
 
 export function EducationPositionItem({
   position,
+  institutionName,
+  institutionLogo,
 }: {
   position: EducationPositionItemType;
+  institutionName?: string;
+  institutionLogo?: string;
 }) {
   const [isOpen, setIsOpen] = useState(position.isExpanded || false);
-  const EducationIcon = iconMap[position.icon || "education"];
 
   return (
-    <div className="relative last:before:absolute last:before:h-full last:before:w-4 last:before:bg-background">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="group/experience not-prose block w-full select-none text-left"
-      >
-        <div className="z-1 relative mb-1 flex items-center gap-3 bg-background">
-          <div
-            className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground"
-            aria-hidden
-          >
-            <EducationIcon className="size-4" />
+    <div className="group flex gap-4 pb-2">
+      {/* Timeline dot indicator */}
+      <div className="relative z-10 mt-1.5 flex h-3 w-3 flex-shrink-0 items-center justify-center">
+        <span className="h-3 w-3 rounded-full border-2 border-primary bg-background transition-colors duration-300 group-hover:bg-primary" />
+      </div>
+
+      {/* Content card */}
+      <div className="flex-1">
+        <div className="rounded-lg border border-muted bg-card p-4 shadow-sm transition-all duration-300 hover:bg-card/95 hover:shadow group-hover:border-muted/80">
+          <div className="mb-1 flex flex-col justify-between gap-2 md:flex-row md:items-center">
+            <h3 className="text-base font-medium">
+              {institutionName || position.degree}
+            </h3>
+            <div className="text-sm tabular-nums text-muted-foreground">
+              {position.educationPeriod}
+            </div>
           </div>
 
-          <h4 className="flex-1 text-balance text-base font-medium">
-            {position.degree}
-            {position.field && (
-              <span className="text-muted-foreground">
-                {" "}
-                in {position.field}
+          <div className="mb-2 flex flex-wrap items-center gap-1">
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              {position.degree}
+              {position.field && (
+                <span className="text-muted-foreground">
+                  {" "}
+                  — {position.field}
+                </span>
+              )}
+            </span>
+            <div className="flex-1" />
+            {position.educationType && (
+              <span className="inline-flex items-center rounded-md border px-2 py-0.5 text-xs text-muted-foreground">
+                {position.educationType}
               </span>
             )}
-          </h4>
+          </div>
 
-          <div
-            className="shrink-0 text-muted-foreground [&_svg]:size-4"
-            aria-hidden
+          {/* Expandable section */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="mt-1 flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             {isOpen ? (
-              <ChevronUpIcon className="size-4" />
+              <>
+                <ChevronUpIcon className="size-3" /> Hide details
+              </>
             ) : (
-              <ChevronDownIcon className="size-4" />
+              <>
+                <ChevronDownIcon className="size-3" /> Show details
+              </>
             )}
-          </div>
-        </div>
+          </button>
 
-        <div className="flex items-center gap-2 pl-9 text-sm text-muted-foreground">
-          {position.educationType && (
-            <>
-              <dl>
-                <dt className="sr-only">Education Type</dt>
-                <dd>{position.educationType}</dd>
-              </dl>
-              <span className="text-muted-foreground">•</span>
-            </>
-          )}
+          {isOpen && (
+            <div className="mt-3 space-y-3">
+              {position.description && (
+                <p className="text-sm text-muted-foreground">
+                  {position.description}
+                </p>
+              )}
 
-          <dl>
-            <dt className="sr-only">Education Period</dt>
-            <dd>{position.educationPeriod}</dd>
-          </dl>
-        </div>
-      </button>
+              {Array.isArray(position.coursework) &&
+                position.coursework.length > 0 && (
+                  <div>
+                    <h5 className="mb-2 text-xs font-medium text-foreground">
+                      Relevant Coursework
+                    </h5>
+                    <ul className="not-prose flex flex-wrap gap-1.5">
+                      {position.coursework.map((course, index) => (
+                        <li key={index} className="flex">
+                          <Skill className="border-blue-200 bg-blue-500/10 text-blue-600 dark:border-blue-800 dark:bg-blue-500/20 dark:text-blue-400">
+                            {course}
+                          </Skill>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-      {isOpen && (
-        <div className="overflow-hidden">
-          {position.description && (
-            <Prose className="pl-9 pt-2">
-              <ReactMarkdown>{position.description}</ReactMarkdown>
-            </Prose>
-          )}
-
-          {Array.isArray(position.coursework) &&
-            position.coursework.length > 0 && (
-              <div className="pl-9 pt-2">
-                <h5 className="mb-2 text-sm font-medium text-foreground">
-                  Relevant Coursework
-                </h5>
-                <ul className="not-prose flex flex-wrap gap-1.5">
-                  {position.coursework.map((course, index) => (
-                    <li key={index} className="flex">
-                      <Skill className="border-blue-200 bg-blue-500/10 text-blue-600 dark:border-blue-800 dark:bg-blue-500/20 dark:text-blue-400">
-                        {course}
-                      </Skill>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-          {Array.isArray(position.skills) && position.skills.length > 0 && (
-            <div className="pl-9 pt-2">
-              <h5 className="mb-2 text-sm font-medium text-foreground">
-                Skills Learned
-              </h5>
-              <ul className="not-prose flex flex-wrap gap-1.5">
-                {position.skills.map((skill, index) => (
-                  <li key={index} className="flex">
-                    <Skill>{skill}</Skill>
-                  </li>
-                ))}
-              </ul>
+              {Array.isArray(position.skills) && position.skills.length > 0 && (
+                <div>
+                  <h5 className="mb-2 text-xs font-medium text-foreground">
+                    Skills Learned
+                  </h5>
+                  <ul className="not-prose flex flex-wrap gap-1.5">
+                    {position.skills.map((skill, index) => (
+                      <li key={index} className="flex">
+                        <Skill>{skill}</Skill>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
