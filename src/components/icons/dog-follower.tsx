@@ -9,84 +9,102 @@ function getDistance(x1: number, y1: number, x2: number, y2: number): number {
   return Math.sqrt(dx * dx + dy * dy);
 }
 
-// Move toward target at constant speed
-function moveTowards(
-  currentX: number,
-  currentY: number,
-  targetX: number,
-  targetY: number,
-  speed: number,
-): { x: number; y: number } {
-  const dx = targetX - currentX;
-  const dy = targetY - currentY;
-  const distance = Math.sqrt(dx * dx + dy * dy);
-
-  // If we're close enough, stop
-  if (distance <= speed) {
-    return { x: targetX, y: targetY };
-  }
-
-  // Move at constant speed toward target
-  const ratio = speed / distance;
-  return {
-    x: currentX + dx * ratio,
-    y: currentY + dy * ratio,
-  };
+// Normalize angle to handle shortest path interpolation smoothly (-180 to 180)
+function normalizeAngle(angle: number): number {
+  let a = angle % 360;
+  if (a > 180) a -= 360;
+  if (a < -180) a += 360;
+  return a;
 }
 
 export default function DogFollower() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [dog, setDog] = useState({ x: 0, y: 0 });
-  const [facingLeft, setFacingLeft] = useState(false);
-  const [isRunning, setIsRunning] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  
+  const dogRef = useRef<HTMLImageElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const posRef = useRef({ x: 0, y: 0 });
+  const rotRef = useRef(0);
   const requestRef = useRef<number>();
 
   // Distance threshold - dog stops running when close enough
-  const STOP_DISTANCE = 50;
-  // Constant speed in pixels per frame (adjust for faster/slower)
-  const SPEED = 1;
+  const STOP_DISTANCE = 60;
+  // Lerp factor controls how fast/snappy the dog follows (lower = slower/smoother)
+  const LERP_FACTOR = 0.005;
 
   // Initialize on client side
   useEffect(() => {
     setIsClient(true);
-    setMouse({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-    setDog({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    mouseRef.current = { x: centerX, y: centerY };
+    posRef.current = { x: centerX, y: centerY };
   }, []);
 
   // Track mouse movement
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
+      mouseRef.current = { x: e.clientX, y: e.clientY };
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Animate dog following cursor with constant speed
+  // Animate dog directly manipulating DOM for ultra-smooth 60fps without React state lag
   useEffect(() => {
+    if (!isClient) return;
+
     function animate() {
-      setDog((d) => {
-        const distance = getDistance(d.x, d.y, mouse.x, mouse.y);
+      if (!dogRef.current) return;
+      
+      const mouse = mouseRef.current;
+      const currentPos = posRef.current;
+      
+      const distance = getDistance(currentPos.x, currentPos.y, mouse.x, mouse.y);
+      
+      // If beyond stop distance, move and rotate towards cursor
+      if (distance > STOP_DISTANCE) {
+        // Smoothly interpolate position towards mouse
+        currentPos.x += (mouse.x - currentPos.x) * LERP_FACTOR;
+        currentPos.y += (mouse.y - currentPos.y) * LERP_FACTOR;
+        
+        // Target rotation based on full 360 trajectory
+        const dx = mouse.x - currentPos.x;
+        const dy = mouse.y - currentPos.y;
+        
+        const targetAngleRad = Math.atan2(dy, dx);
+        let targetAngleDeg = (targetAngleRad * 180) / Math.PI;
 
-        // Only move if far enough from cursor
-        if (distance > STOP_DISTANCE) {
-          setIsRunning(true);
+        // Smoothly interpolate rotation using shortest path
+        let angleDiff = normalizeAngle(targetAngleDeg - rotRef.current);
+        
+        // Rotate smoothly towards the target angle
+        rotRef.current += angleDiff * 0.05; // slightly faster lerp for rotation than movement
+        rotRef.current = normalizeAngle(rotRef.current);
+        
+        // Update DOM directly
+        dogRef.current.style.left = `${currentPos.x - 32}px`;
+        dogRef.current.style.top = `${currentPos.y - 32}px`;
+        
+        // Apply 360 rotation (but flip vertically if moving left so it's not completely upside down)
+        // If the rotation is pointing left (between 90 and 180, or -90 and -180), we flip the Y axis 
+        // to keep the dog upright while maintaining the correct trajectory angle.
+        const isFacingLeft = Math.abs(rotRef.current) > 90;
+        dogRef.current.style.transform = `rotate(${rotRef.current}deg) scaleY(${isFacingLeft ? -1 : 1})`;
+        
+      } else {
+        // Dog has reached the stop distance, just pause movement.
+        // We gently level out the dog to be upright when stopped
+        let targetAngleDeg = 0;
+        // If it was facing left when it stopped, level it out facing left
+        const isFacingLeft = Math.abs(rotRef.current) > 90;
+        if (isFacingLeft) targetAngleDeg = 180;
+        
+        let angleDiff = normalizeAngle(targetAngleDeg - rotRef.current);
+        rotRef.current += angleDiff * 0.05;
+        rotRef.current = normalizeAngle(rotRef.current);
 
-          // Determine if dog should face left or right
-          if (mouse.x < d.x) {
-            setFacingLeft(true);
-          } else if (mouse.x > d.x) {
-            setFacingLeft(false);
-          }
-
-          // Move toward cursor at constant speed
-          return moveTowards(d.x, d.y, mouse.x, mouse.y, SPEED);
-        } else {
-          setIsRunning(false);
-          return d;
-        }
-      });
+        dogRef.current.style.transform = `rotate(${rotRef.current}deg) scaleY(${isFacingLeft ? -1 : 1})`;
+      }
 
       requestRef.current = requestAnimationFrame(animate);
     }
@@ -97,26 +115,22 @@ export default function DogFollower() {
         cancelAnimationFrame(requestRef.current);
       }
     };
-  }, [mouse]);
+  }, [isClient]);
 
   if (!isClient) return null;
 
   return (
     <img
+      ref={dogRef}
       src="/dog-image-unscreen.gif"
       alt="dog follower"
-      className={isRunning ? "running" : "idle"}
       style={{
         position: "fixed",
-        left: `${dog.x - 32}px`,
-        top: `${dog.y - 32}px`,
         width: 80,
         height: 80,
         pointerEvents: "none",
         zIndex: 9999,
-        // Flip horizontally when facing left
-        transform: facingLeft ? "scaleX(-1)" : "scaleX(1)",
-        transition: "transform 0.2s ease-out",
+        willChange: "transform, left, top",
       }}
     />
   );
