@@ -18,7 +18,7 @@ import { InteractiveSkills } from "@/components/interactive-skills";
 import { WorkTimeline } from "@/components/work-timeline";
 import { HyperText } from "@/components/magicui/hyper-text";
 import { Education } from "@/components/ui/work";
-import DogFollower from "@/components/icons/dog-follower";
+
 
 // Name animation overlay component
 const NameAnimation = () => {
@@ -168,8 +168,7 @@ export default function Page() {
 
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 md:p-16 print:p-12">
-      {/* Dog follower component */}
-      <DogFollower />
+
 
 
 

@@ -95,7 +95,7 @@ export function HoverNavbar({ links = [] }: NavbarProps) {
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.3 }}
-        className="rounded-full border border-gray-200 bg-white/80 shadow-xl backdrop-blur-xl dark:border-gray-800 dark:bg-gray-900/80"
+        className="rounded-full border border-gray-200 bg-white/80 shadow-xl backdrop-blur-xl dark:border-neutral-800 dark:bg-black/80"
       >
         <nav className="flex items-center space-x-1 px-3 py-2">
           {navItems.map((item) => (
@@ -103,7 +103,7 @@ export function HoverNavbar({ links = [] }: NavbarProps) {
               key={item.name}
               variant="ghost"
               size="icon"
-              className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-neutral-800"
               asChild
               title={item.name}
             >
@@ -117,13 +117,13 @@ export function HoverNavbar({ links = [] }: NavbarProps) {
           ))}
 
           {/* Divider */}
-          <div className="mx-1 h-5 w-px bg-gray-200 dark:bg-gray-700" />
+          <div className="mx-1 h-5 w-px bg-gray-200 dark:bg-neutral-700" />
 
           {/* Dark mode toggle */}
           <Button
             variant="ghost"
             size="icon"
-            className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-gray-800"
+            className="h-9 w-9 rounded-full transition-all hover:bg-gray-100 dark:hover:bg-neutral-800"
             onClick={toggleDarkMode}
             title={isDark ? "Light mode" : "Dark mode"}
           >
