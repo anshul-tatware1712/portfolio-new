@@ -19,7 +19,6 @@ import { WorkTimeline } from "@/components/work-timeline";
 import { HyperText } from "@/components/magicui/hyper-text";
 import { Education } from "@/components/ui/work";
 
-
 // Name animation overlay component
 const NameAnimation = () => {
   const [visible, setVisible] = useState(true);
@@ -103,8 +102,6 @@ const NameAnimation = () => {
   );
 };
 
-
-
 // Type definition for GitHub repository data
 interface Repository {
   id: number;
@@ -168,10 +165,6 @@ export default function Page() {
 
   return (
     <main className="container relative mx-auto scroll-my-12 overflow-auto p-4 md:p-16 print:p-12">
-
-
-
-
       {/* Add the name animation component */}
       <NameAnimation />
 
@@ -244,17 +237,10 @@ export default function Page() {
                     <Button
                       variant="outline"
                       className="flex h-8 items-center gap-2"
-                      asChild
+                      disabled
                     >
-                      <a
-                        href={RESUME_DATA.resumeUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        download
-                      >
-                        <FileDown className="size-4" />
-                        <span>Download CV</span>
-                      </a>
+                      <FileDown className="size-4" />
+                      <span>Download CV</span>
                     </Button>
                   </div>
                   <div className="hidden flex-col gap-x-1 text-sm text-muted-foreground print:flex">
@@ -319,7 +305,7 @@ export default function Page() {
               </Section>
               <Section id="certifications" className="scroll-mt-16 pb-10">
                 <h2 className="text-xl font-medium">Certifications</h2>
-                <Education educations={CERTIFICATIONS_DATA} />
+                <Education educations={CERTIFICATIONS_DATA} compact />
               </Section>
             </motion.section>
           </motion.div>

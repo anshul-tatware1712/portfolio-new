@@ -161,15 +161,22 @@ export function ExperienceItem({
   );
 }
 
-export function EducationItem({ education }: { education: EducationItemType }) {
+export function EducationItem({
+  education,
+  compact = false,
+}: {
+  education: EducationItemType;
+  compact?: boolean;
+}) {
   return (
-    <div className="mt-4">
+    <div className={cn(compact ? "mt-2" : "mt-4")}>
       {education.positions.map((position) => (
         <EducationPositionItem
           key={position.id}
           position={position}
           institutionName={education.institutionName}
           institutionLogo={education.institutionLogo}
+          compact={compact}
         />
       ))}
     </div>
@@ -180,14 +187,20 @@ export function EducationItem({ education }: { education: EducationItemType }) {
 export function Education({
   className,
   educations,
+  compact = false,
 }: {
   className?: string;
   educations: EducationItemType[];
+  compact?: boolean;
 }) {
   return (
-    <div className={cn("bg-background px-4", className)}>
+    <div className={cn("bg-background", compact ? "px-0" : "px-4", className)}>
       {educations.map((education) => (
-        <EducationItem key={education.id} education={education} />
+        <EducationItem
+          key={education.id}
+          education={education}
+          compact={compact}
+        />
       ))}
     </div>
   );
@@ -276,12 +289,75 @@ export function EducationPositionItem({
   position,
   institutionName,
   institutionLogo,
+  compact = false,
 }: {
   position: EducationPositionItemType;
   institutionName?: string;
   institutionLogo?: string;
+  compact?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(position.isExpanded || false);
+
+  if (compact) {
+    const hasDetails = Boolean(position.description || position.skills?.length);
+
+    return (
+      <div className="border-b border-border/60 last:border-0">
+        <button
+          type="button"
+          onClick={() => hasDetails && setIsOpen(!isOpen)}
+          aria-expanded={hasDetails ? isOpen : undefined}
+          className="flex min-h-10 w-full min-w-0 items-center gap-2 py-2 text-left"
+        >
+          <span
+            className="min-w-0 flex-1 truncate text-sm font-medium"
+            title={position.degree}
+          >
+            {position.degree}
+          </span>
+          {position.field && (
+            <>
+              <span className="text-muted-foreground" aria-hidden="true">
+                ·
+              </span>
+              <span
+                className="hidden max-w-[35%] truncate text-sm text-muted-foreground sm:inline"
+                title={position.field}
+              >
+                {position.field}
+              </span>
+            </>
+          )}
+          <span className="ml-auto shrink-0 text-xs tabular-nums text-muted-foreground">
+            {position.educationPeriod}
+          </span>
+          {hasDetails && (
+            <ChevronDownIcon
+              className={cn(
+                "size-3 shrink-0 text-muted-foreground transition-transform",
+                isOpen && "rotate-180",
+              )}
+              aria-hidden="true"
+            />
+          )}
+        </button>
+        {isOpen && hasDetails && (
+          <div className="space-y-2 pb-3 pr-5 text-sm text-muted-foreground">
+            {position.description && <p>{position.description}</p>}
+            {position.skills && position.skills.length > 0 && (
+              <ul className="flex flex-wrap gap-1.5">
+                {position.skills.map((skill) => (
+                  <li key={skill}>
+                    <Skill>{skill}</Skill>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="group flex gap-4 pb-2">
