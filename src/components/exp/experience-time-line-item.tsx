@@ -22,11 +22,6 @@ export const ExperienceTimelineItem: React.FC<ExperienceTimelineItemProps> = ({
       transition={{ delay: index * 0.1 }}
     >
       <div className="group flex gap-4">
-        {/* Timeline dot indicator */}
-        <div className="relative z-10 mt-1.5 flex h-3 w-3 flex-shrink-0 items-center justify-center">
-          <span className="h-3 w-3 rounded-full border-2 border-primary bg-background transition-colors duration-300 group-hover:bg-primary" />
-        </div>
-
         {/* Content */}
         <div className="flex-1 pb-2">
           <div className="rounded-lg border border-muted bg-card p-4 shadow-sm transition-all duration-300 hover:bg-card/95 hover:shadow group-hover:border-muted/80">
@@ -62,9 +57,11 @@ export const ExperienceTimelineItem: React.FC<ExperienceTimelineItemProps> = ({
                 </Badge>
               ))}
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {work.description}
-            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+              {work.description.map((achievement: string) => (
+                <li key={achievement}>{achievement}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 interface WorkExperience {
     company: string;
     title: string;
-    description: string;
+  description: readonly string[];
     start: string;
     end?: string;
     link: string;

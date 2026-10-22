@@ -228,8 +228,12 @@ export const RESUME_DATA = {
       title: "SDE-1 (Software Engineer)",
       start: "Aug 2025",
       end: undefined,
-      description:
-        "Engineered the Admin Panel and headless storefront for an enterprise D365 Commerce platform using Next.js 15, React 19, and App Router with SSR/SSG. Built a drag-and-drop Site Builder (dnd-kit), integration flow visualizer (ReactFlow), and RBAC dashboards with CASL + Microsoft Entra ID SSO. Developed the E4 GraphQL middleware (Apollo Server v4 + Koa) with TanStack Query v5 hydration boundaries, DataLoader batching, and Elasticsearch full-text search. Worked across a 14-service monorepo (Lerna + Nx + Turbo) spanning Strapi 5, MSSQL, PostgreSQL, Redis, Kafka, and Azure Functions, with OpenTelemetry + Jaeger tracing and Azure Key Vault secrets management. Owned frontend testing with Vitest, React Testing Library, MSW, and Cypress E2E.",
+      description: [
+        "Built DuoChat CRM features for shared inbox, contact and lead management, campaigns, templates, and workspace administration using React, TypeScript, and Redux Toolkit.",
+        "Developed Meta WhatsApp API workflows and real-time messaging, including a drag-and-drop WhatsApp Flows builder for booking, lead capture, and order tracking; reduced template creation from 30 minutes to 3 minutes and increased CTR by 47%.",
+        "Delivered landing, SSO, product listing and detail, cart, and checkout journeys for a Next.js 15 headless storefront serving 25K+ SKUs across Sana Commerce and Microsoft Dynamics 365 Commerce.",
+        "Implemented RSC, SSR/SSG, ISR, caching, on-demand revalidation, localized SEO metadata, Site Builder features, and commerce API integrations for catalogs, pricing, customers, carts, and orders.",
+      ],
     },
     {
       company: "Pixel Technology",
@@ -238,8 +242,12 @@ export const RESUME_DATA = {
       title: "SDE-1 (Software Engineer)",
       start: "Dec 2024",
       end: "Aug 2025",
-      description:
-        "Architected real-time messaging infrastructure for 100+ businesses supporting 10K+ concurrent WebSocket connections with less than w100ms delivery latency, plus a shared team inbox with live agent assignment, conversation tagging, and canned responses. Built a full Meta Business API template engine (text, media, carousel, WhatsApp Flows, interactive lists, auth OTP, LTO) reducing creation time from 30 min to 3 min and lifting CTR by 47%. Slashed bundle size by 65% and improved LCP from 4.2s to 2.5s through RTK Query cache normalization, React.lazy code-splitting, and dynamic imports. Built a Binance P2P-style marketplace with smart-contract-backed escrow achieving 94% transaction success rate across USDT/ETH/TRX pairs. Integrated MetaMask and TronLink wallets with full deposit/withdrawal flows, Web3 sign-to-verify + JWT auth with 2FA and KYC gates.",
+      description: [
+        "Built a Binance P2P-style marketplace with authentication, trading dashboards, offer listings, profiles, and transaction history using React and TypeScript.",
+        "Implemented P2P order workflows for creation, payment confirmation, asset release, cancellations, and disputes with reusable components, typed state, and API integrations.",
+        "Integrated MetaMask and TronLink for USDT deposits and withdrawals on EVM-compatible and TRON networks, handling wallet connections and transaction states.",
+        "Developed typed trading interfaces for offers, orders, balances, and transaction tracking, and built a React Native and Expo app integrating REST APIs for authentication, trading, wallets, and history.",
+      ],
     },
   ],
   skills: {
